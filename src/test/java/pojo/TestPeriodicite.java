@@ -35,7 +35,7 @@ public class TestPeriodicite {
     }
 
     @Test
-    public void testNormalisationOk(){
+    public void testSetLibelleNormalisationOk(){
         this.periodicite.setLibelle("    bonjour monde    ");
         Assert.assertEquals("bonjour monde",this.periodicite.getLibelle());
     }

@@ -8,7 +8,7 @@ public class Periodicite {
 
     public Periodicite(int i, String l){
         this.id=i;
-        this.libelle=l.trim();
+        this.setLibelle(l);
     }
 
     public int getId() {

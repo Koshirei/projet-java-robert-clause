@@ -7,21 +7,21 @@ public class Client {
     private int    id;
     private String nom;
     private String prenom;
-    private String no_rue;
+    private String noRue;
     private String voie;
-    private String code_postal;
+    private String codePostal;
     private String ville;
     private String pays;
 
-    public Client(int id, String nom, String prenom, String no_rue, String voie, String code_postal, String ville, String pays) {
-        this.id = id;
-        this.nom = nom.trim();
-        this.prenom = prenom.trim();
-        this.no_rue = no_rue.trim();
-        this.voie = voie.trim();
-        this.code_postal = code_postal.trim();
-        this.ville = ville.trim();
-        this.pays = pays.trim();
+    public Client(int id, String nom, String prenom, String noRue, String voie, String codePostal, String ville, String pays) {
+        this.setId(id);
+        this.setNom(nom);
+        this.setPrenom(prenom);
+        this.setNoRue(noRue);
+        this.setVoie(voie);
+        this.setCodePostal(codePostal);
+        this.setVille(ville);
+        this.setPays(pays);
     }
 
     public int getId() {
@@ -48,12 +48,12 @@ public class Client {
         this.prenom = prenom;
     }
 
-    public String getNo_rue() {
-        return no_rue;
+    public String getNoRue() {
+        return noRue;
     }
 
-    public void setNo_rue(String no_rue) {
-        this.no_rue = no_rue;
+    public void setNoRue(String noRue) {
+        this.noRue = noRue;
     }
 
     public String getVoie() {
@@ -64,12 +64,12 @@ public class Client {
         this.voie = voie;
     }
 
-    public String getCode_postal() {
-        return code_postal;
+    public String getCodePostal() {
+        return codePostal;
     }
 
-    public void setCode_postal(String code_postal) {
-        this.code_postal = code_postal;
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
     }
 
     public String getVille() {
@@ -88,27 +88,9 @@ public class Client {
         this.pays = pays;
     }
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", no_rue='" + no_rue + '\'' +
-                ", voie='" + voie + '\'' +
-                ", code_postal='" + code_postal + '\'' +
-                ", ville='" + ville + '\'' +
-                ", pays='" + pays + '\'' +
-                '}';
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-        return id == client.id && Objects.equals(nom, client.nom) && Objects.equals(prenom, client.prenom) && Objects.equals(no_rue, client.no_rue) && Objects.equals(voie, client.voie) && Objects.equals(code_postal, client.code_postal) && Objects.equals(ville, client.ville) && Objects.equals(pays, client.pays);
-    }
+
+
 
 }
 

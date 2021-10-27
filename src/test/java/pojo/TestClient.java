@@ -47,13 +47,13 @@ public class TestClient {
 
     @Test
     public void testGetNoRueOk(){
-        Assert.assertEquals("45", this.client.getNo_rue());
+        Assert.assertEquals("45", this.client.getNoRue());
     }
 
     @Test
     public void testSetNoRueOk(){
-        this.client.setNo_rue("30");
-        Assert.assertEquals("30", this.client.getNo_rue());
+        this.client.setNoRue("30");
+        Assert.assertEquals("30", this.client.getNoRue());
     }
 
     @Test
@@ -69,13 +69,13 @@ public class TestClient {
 
     @Test
     public void testGetCodePostalOk(){
-        Assert.assertEquals("57270", this.client.getCode_postal());
+        Assert.assertEquals("57270", this.client.getCodePostal());
     }
 
     @Test
     public void testSetCodePostalOk(){
-        this.client.setCode_postal("40500");
-        Assert.assertEquals("40500", this.client.getCode_postal());
+        this.client.setCodePostal("40500");
+        Assert.assertEquals("40500", this.client.getCodePostal());
     }
 
     @Test
