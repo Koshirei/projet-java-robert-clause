@@ -109,9 +109,31 @@ public class Client {
         this.pays = pays;
     }
 
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", noRue='" + noRue + '\'' +
+                ", voie='" + voie + '\'' +
+                ", codePostal='" + codePostal + '\'' +
+                ", ville='" + ville + '\'' +
+                ", pays='" + pays + '\'' +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return id == client.id && Objects.equals(nom, client.nom) && Objects.equals(prenom, client.prenom) && Objects.equals(noRue, client.noRue) && Objects.equals(voie, client.voie) && Objects.equals(codePostal, client.codePostal) && Objects.equals(ville, client.ville) && Objects.equals(pays, client.pays);
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom, prenom, noRue, voie, codePostal, ville, pays);
+    }
 }
 
