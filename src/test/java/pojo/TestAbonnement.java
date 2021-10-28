@@ -11,7 +11,19 @@ public class TestAbonnement {
 
     @Before
     public void init() {
-        this.abonnement = new Abonnement(0, "ABC001", new Date(0), new Date(10));
+        this.abonnement = new Abonnement(0, 0, "ABC001", new Date(0), new Date(10));
+    }
+
+    @Test
+    public void testGetIdOk() {
+        Assert.assertEquals(0, this.abonnement.getId());
+    }
+
+    @Test
+    public void testSetIdOk() {
+        this.abonnement.setId(1);
+
+        Assert.assertEquals(1, this.abonnement.getId());
     }
 
     @Test

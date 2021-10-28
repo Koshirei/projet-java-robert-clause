@@ -4,16 +4,42 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class Abonnement {
+    private int id;
     private int numeroClient;
     private String referenceRevue;
     private Date dateDebut;
     private Date dateFin;
 
-    public Abonnement(int numeroClient, String referenceRevue, Date dateDebut, Date dateFin) {
+    public Abonnement(int id, int numeroClient, String referenceRevue, Date dateDebut, Date dateFin) {
+        this.setId(id);
         this.setNumeroClient(numeroClient);
         this.setReferenceRevue(referenceRevue);
         this.setDateDebut(dateDebut);
         this.setDateFin(dateFin);
+    }
+
+    public Abonnement(int numeroClient, String referenceRevue, Date dateDebut, Date dateFin) {
+        this.setId(-1);
+        this.setNumeroClient(numeroClient);
+        this.setReferenceRevue(referenceRevue);
+        this.setDateDebut(dateDebut);
+        this.setDateFin(dateFin);
+    }
+
+    public Abonnement() {
+        this.id = -1;
+        this.numeroClient = -1;
+        this.referenceRevue = null;
+        this.dateDebut = null;
+        this.dateFin = null;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getNumeroClient() {
