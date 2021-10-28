@@ -24,6 +24,27 @@ public class Client {
         this.setPays(pays);
     }
 
+    public Client(String nom, String prenom, String noRue, String voie, String codePostal, String ville, String pays) {
+        this.setNom(nom);
+        this.setPrenom(prenom);
+        this.setNoRue(noRue);
+        this.setVoie(voie);
+        this.setCodePostal(codePostal);
+        this.setVille(ville);
+        this.setPays(pays);
+    }
+
+    public Client() {
+        this.id = -1;
+        this.nom = null;
+        this.prenom = null;
+        this.noRue = null;
+        this.voie = null;
+        this.codePostal = null;
+        this.ville = null;
+        this.pays = null;
+    }
+
     public int getId() {
         return id;
     }
