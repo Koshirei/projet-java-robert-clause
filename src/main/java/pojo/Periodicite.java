@@ -7,8 +7,18 @@ public class Periodicite {
     private String libelle;
 
     public Periodicite(int i, String l){
-        this.id=i;
+        this.setId(i);
         this.setLibelle(l);
+    }
+
+    public Periodicite(String l) {
+        this.id = -1;
+        this.setLibelle(l);
+    }
+
+    public Periodicite() {
+        this.id = -1;
+        this.libelle = null;
     }
 
     public int getId() {
