@@ -2,12 +2,21 @@ package pojo;
 
 import java.util.Objects;
 
-public class Revue {
+public class Revue
+    private int id;
     private String reference;
     private String titre;
     private String description;
     private float tarif;
     private String periodicite; // enum ??
+
+    public Revue(int id, String reference, String titre, String description, float tarif, String periodicite) throws Exception {
+        this.setReference(reference);
+        this.setTitre(titre);
+        this.setDescription(description);
+        this.setTarif(tarif);
+        this.setPeriodicite(periodicite);
+    }
 
     public Revue(String reference, String titre, String description, float tarif, String periodicite) throws Exception {
         this.setReference(reference);
@@ -15,6 +24,23 @@ public class Revue {
         this.setDescription(description);
         this.setTarif(tarif);
         this.setPeriodicite(periodicite);
+    }
+
+    public Revue() throws Exception {
+        this.id = -1;
+        this.reference = null;
+        this.titre = null;
+        this.description = null;
+        this.tarif = -1.0f;
+        this.periodicite = null;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getReference() {
