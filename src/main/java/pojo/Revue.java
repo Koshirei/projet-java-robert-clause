@@ -2,7 +2,7 @@ package pojo;
 
 import java.util.Objects;
 
-public class Revue
+public class Revue {
     private int id;
     private String reference;
     private String titre;
