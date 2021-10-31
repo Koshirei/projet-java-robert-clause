@@ -12,6 +12,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MySQLClientDAO implements ClientDAO {
+    private static MySQLClientDAO instance;
+
+    private MySQLClientDAO() {}
+
+    public static MySQLClientDAO getInstance() {
+        if (instance == null) {
+            instance = new MySQLClientDAO();
+        }
+
+        return instance;
+    }
+
 
     @Override
     public Client getById(int id) throws SQLException, IOException {

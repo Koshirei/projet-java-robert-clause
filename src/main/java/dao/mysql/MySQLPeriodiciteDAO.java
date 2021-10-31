@@ -12,6 +12,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
+    private static MySQLPeriodiciteDAO instance;
+
+    private MySQLPeriodiciteDAO() {}
+
+    public static MySQLPeriodiciteDAO getInstance() {
+        if (instance == null) {
+            instance = new MySQLPeriodiciteDAO();
+        }
+
+        return instance;
+    }
+
     @Override
     public Periodicite getById(int id) throws SQLException, IOException {
         Connection connection = ConnexionMySQL.getInstance().creeConnexion();
