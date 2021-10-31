@@ -9,7 +9,19 @@ public class TestRevue {
 
     @Before
     public void init() throws Exception {
-        this.revue = new Revue("ABC001", "Titre", "Description", 9.90f, "Mensuel");
+        this.revue = new Revue(0, "ABC001", "Titre", "Description", 9.90f, "Mensuel");
+    }
+
+    @Test
+    public void testGetIdOk() {
+        Assert.assertEquals(0, this.revue.getId());
+    }
+
+    @Test
+    public void testSetIdOk() {
+        this.revue.setId(1);
+
+        Assert.assertEquals(1, this.revue.getId());
     }
 
     @Test
