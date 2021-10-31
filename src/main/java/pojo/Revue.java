@@ -11,6 +11,7 @@ public class Revue {
     private String periodicite; // enum ??
 
     public Revue(int id, String reference, String titre, String description, float tarif, String periodicite) throws Exception {
+        this.setId(id);
         this.setReference(reference);
         this.setTitre(titre);
         this.setDescription(description);
@@ -19,6 +20,7 @@ public class Revue {
     }
 
     public Revue(String reference, String titre, String description, float tarif, String periodicite) throws Exception {
+        this.id = -1;
         this.setReference(reference);
         this.setTitre(titre);
         this.setDescription(description);
