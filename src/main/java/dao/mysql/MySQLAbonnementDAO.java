@@ -79,7 +79,7 @@ public class MySQLAbonnementDAO implements AbonnementDAO {
         String sql = "delete from Abonnement where id = ?";
 
         PreparedStatement prepareStatement = connection.prepareStatement(sql);
-        prepareStatement.setInt(1, objet.getId());
+        prepareStatement.setInt(1, -2);
 
         boolean nombreLigne = prepareStatement.executeUpdate() == 1;
 
@@ -91,14 +91,25 @@ public class MySQLAbonnementDAO implements AbonnementDAO {
     @Override
     public boolean creer(Abonnement objet) throws SQLException, IOException {
         Connection connection = ConnexionMySQL.getInstance().creeConnexion();
-
-        String sql = "insert into Abonnement (numeroClient, referenceRevue, dateDebut, dateFin) values (?, ?, ?, ?)";
+        String sql = "insert into Abonnement (id, numeroClient, referenceRevue, dateDebut, dateFin) values (?, ?, ?, ?, ?)";
 
         PreparedStatement prepareStatement = connection.prepareStatement(sql);
-        prepareStatement.setInt(1, objet.getNumeroClient());
-        prepareStatement.setString(2, objet.getReferenceRevue());
-        prepareStatement.setDate(3, objet.getDateDebut());
-        prepareStatement.setDate(4, objet.getDateFin());
+        prepareStatement.setInt(1, objet.getId());
+        prepareStatement.setInt(2, objet.getNumeroClient());
+        prepareStatement.setString(3, objet.getReferenceRevue());
+        prepareStatement.setDate(4, objet.getDateDebut());
+        prepareStatement.setDate(5, objet.getDateFin());
+
+        if (objet.getId() == -1) {
+            sql = "insert into Abonnement (numeroClient, referenceRevue, dateDebut, dateFin) values (?, ?, ?, ?)";
+
+            prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setInt(1, objet.getNumeroClient());
+            prepareStatement.setString(2, objet.getReferenceRevue());
+            prepareStatement.setDate(3, objet.getDateDebut());
+            prepareStatement.setDate(4, objet.getDateFin());
+
+        }
 
         boolean nombreLigne = prepareStatement.executeUpdate() == 1;
 
