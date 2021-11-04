@@ -24,7 +24,7 @@ public class TestConnexionMySQL {
             Assert.assertEquals("Le fichier Properties.xml n'a pas été trouvé.", e.getMessage());
 
         } catch (SQLException e) {
-            Assert.assertEquals("Erreur SQL.", e.getMessage());
+            Assert.fail(e.getMessage());
 
         }
     }
