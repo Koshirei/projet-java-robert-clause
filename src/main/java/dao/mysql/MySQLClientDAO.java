@@ -75,16 +75,28 @@ public class MySQLClientDAO implements ClientDAO {
         Connection connection = ConnexionMySQL.getInstance().creeConnexion();
 
         String sql = "insert into Client (id, nom, prenom, noRue, voie, codePostal, ville, pays) values (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+        PreparedStatement prepareStatement = connection.prepareStatement(sql);
+        prepareStatement.setInt(1, objet.getId());
+        prepareStatement.setString(2, objet.getNom());
+        prepareStatement.setString(3, objet.getPrenom());
+        prepareStatement.setString(4, objet.getNoRue());
+        prepareStatement.setString(5, objet.getVoie());
+        prepareStatement.setString(6, objet.getCodePostal());
+        prepareStatement.setString(7, objet.getVille());
+        prepareStatement.setString(8, objet.getPays());
+
+        if (objet.getId() == -1) {
+            sql = "insert into Client (nom, prenom, noRue, voie, codePostal, ville, pays) values (?, ?, ?, ?, ?, ?, ?)";
             prepareStatement = connection.prepareStatement(sql);
-            prepareStatement.setInt(1, objet.getId());
-            prepareStatement.setString(2, objet.getNom());
-            prepareStatement.setString(3, objet.getPrenom());
-            prepareStatement.setString(4, objet.getNoRue());
-            prepareStatement.setString(5, objet.getVoie());
-            prepareStatement.setString(6, objet.getCodePostal());
-            prepareStatement.setString(7, objet.getVille());
-            prepareStatement.setString(8, objet.getPays());
+            prepareStatement.setString(1, objet.getNom());
+            prepareStatement.setString(2, objet.getPrenom());
+            prepareStatement.setString(3, objet.getNoRue());
+            prepareStatement.setString(4, objet.getVoie());
+            prepareStatement.setString(5, objet.getCodePostal());
+            prepareStatement.setString(6, objet.getVille());
+            prepareStatement.setString(7, objet.getPays());
+        }
+
 
 
         boolean nombreLigne = prepareStatement.executeUpdate() == 1;
