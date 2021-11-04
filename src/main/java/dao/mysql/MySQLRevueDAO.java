@@ -72,14 +72,25 @@ public class MySQLRevueDAO implements RevueDAO {
     public boolean creer(Revue objet) throws SQLException, IOException {
         Connection connection = ConnexionMySQL.getInstance().creeConnexion();
 
-        String sql = "insert into Revue (reference, titre, description, tarif, periodicite) values (?, ?, ?, ?, ?)";
+        String sql = "insert into Revue (id, reference, titre, description, tarif, periodicite) values (?, ?, ?, ?, ?, ?)";
 
         PreparedStatement prepareStatement = connection.prepareStatement(sql);
-        prepareStatement.setString(1, objet.getReference());
-        prepareStatement.setString(2, objet.getTitre());
-        prepareStatement.setString(3, objet.getDescription());
-        prepareStatement.setFloat(4, objet.getTarif());
-        prepareStatement.setString(5, objet.getPeriodicite());
+        prepareStatement.setInt(1, objet.getId());
+        prepareStatement.setString(2, objet.getReference());
+        prepareStatement.setString(3, objet.getTitre());
+        prepareStatement.setString(4, objet.getDescription());
+        prepareStatement.setFloat(5, objet.getTarif());
+        prepareStatement.setString(6, objet.getPeriodicite());
+
+        if (objet.getId() == 1) {
+            sql = "insert into Revue (reference, titre, description, tarif, periodicite) values (?, ?, ?, ?, ?)";
+            prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, objet.getReference());
+            prepareStatement.setString(2, objet.getTitre());
+            prepareStatement.setString(3, objet.getDescription());
+            prepareStatement.setFloat(4, objet.getTarif());
+            prepareStatement.setString(5, objet.getPeriodicite());
+        }
 
         boolean nombreLigne = prepareStatement.executeUpdate() == 1;
 
