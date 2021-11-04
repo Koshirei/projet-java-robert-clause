@@ -67,10 +67,19 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
     public boolean creer(Periodicite objet) throws SQLException, IOException {
         Connection connection = ConnexionMySQL.getInstance().creeConnexion();
 
-        String sql = "insert into Periodicite (libelle) values (?)";
+        String sql = "insert into Periodicite (id, libelle) values (?, ?)";
 
         PreparedStatement prepareStatement = connection.prepareStatement(sql);
-        prepareStatement.setString(1, objet.getLibelle());
+        prepareStatement.setInt(1, objet.getId());
+        prepareStatement.setString(2, objet.getLibelle());
+
+
+        if (objet.getId() == -1) {
+            sql = "insert into Periodicite (libelle) values (?)";
+
+            prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, objet.getLibelle());
+        }
 
         boolean nombreLigne = prepareStatement.executeUpdate() == 1;
 
