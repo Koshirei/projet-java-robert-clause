@@ -79,19 +79,6 @@ public class Abonnement {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Abonnement that = (Abonnement) o;
-        return numeroClient == that.numeroClient && Objects.equals(referenceRevue, that.referenceRevue) && Objects.equals(dateDebut, that.dateDebut) && Objects.equals(dateFin, that.dateFin);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numeroClient, referenceRevue, dateDebut, dateFin);
-    }
-
-    @Override
     public String toString() {
         return "Abonnement{" +
                 "numeroClient=" + numeroClient +
@@ -99,5 +86,18 @@ public class Abonnement {
                 ", dateDebut=" + dateDebut +
                 ", dateFin=" + dateFin +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Abonnement that = (Abonnement) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

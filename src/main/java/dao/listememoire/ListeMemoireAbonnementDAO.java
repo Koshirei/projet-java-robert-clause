@@ -1,7 +1,10 @@
 package dao.listememoire;
 
+
+
 import dao.AbonnementDAO;
 import pojo.Abonnement;
+import pojo.Periodicite;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -32,19 +35,29 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
     }
 
     @Override
-    public boolean creer(Abonnement objet) {
-        objet.setId(5);
+    public boolean creer(Abonnement objet) throws Exception {
+        if (objet.getId() == -1) {
+            objet.setId(5);
 
+            while (this.donnees.contains(objet)) {
+                objet.setId(objet.getId() + 1);
 
-        while (this.donnees.contains(objet)) {
-            objet.setId(objet.getId() + 1);
+            }
+        }
+
+        if (objet.getNumeroClient() == -1 ||
+                objet.getReferenceRevue() == null ||
+                objet.getDateDebut() == null ||
+                objet.getDateFin() == null) {
+
+            throw new Exception("Une des valeurs n'est pas définie");
         }
 
         return this.donnees.add(objet);
     }
 
     @Override
-    public boolean modifier(Abonnement object) {
+    public boolean modifier(Abonnement object) throws IllegalArgumentException {
         int idx = this.donnees.indexOf(object);
 
         if (idx == -1) {
@@ -57,12 +70,7 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
     }
 
     @Override
-    public List<Abonnement> findAll(Abonnement objet) throws SQLException, IOException {
-        return null;
-    }
-
-    @Override
-    public boolean supprimer(Abonnement objet) {
+    public boolean supprimer(Abonnement objet) throws IllegalArgumentException {
         Abonnement supprime;
 
         int idx = this.donnees.indexOf(objet);
@@ -76,14 +84,17 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
         return objet.equals(supprime);
     }
 
-    /*@Override
-    public ArrayList<Abonnement> findAll() {
-        return this.donnees;
-    }*/
-
     @Override
-    public Abonnement getById(int id) {
-        return null;
+    public Abonnement getById(int id) throws IllegalArgumentException {
+        int idx = this.donnees.indexOf(new Abonnement(id, 0,"ABC", null, null));
+
+        if (idx == -1) {
+            throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
+
+        } else {
+
+            return this.donnees.get(idx);
+        }
     }
 
     @Override
@@ -102,15 +113,13 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
     }
 
     @Override
-    public List<Abonnement> getByDateDebut(Date date) {
+    public List<Abonnement> getByDateDebut(Date dateDebut) {
         return null;
     }
 
     @Override
-    public List<Abonnement> getByDateFin(Date date) {
+    public List<Abonnement> getByDateFin(Date dateFin) {
         return null;
     }
-
-
 }
 
