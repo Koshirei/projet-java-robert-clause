@@ -47,7 +47,7 @@ public class MySQLAbonnementDAO implements AbonnementDAO {
     }
 
     @Override
-    public Abonnement getById(int id) throws SQLException, IOException {
+    public Abonnement getById(int id) throws Exception {
         Connection connection = ConnexionMySQL.getInstance().creeConnexion();
 
         String sql = "select * from Abonnement where id = ?";

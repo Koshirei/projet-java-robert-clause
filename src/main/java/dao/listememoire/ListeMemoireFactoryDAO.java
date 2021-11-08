@@ -4,7 +4,7 @@ import dao.*;
 
 public class ListeMemoireFactoryDAO extends DAOFactory {
     @Override
-    public AbonnementDAO getAbonnementDAO() {
+    public AbonnementDAO getAbonnementDAO() throws Exception {
         return ListeMemoireAbonnementDAO.getInstance();
     }
 

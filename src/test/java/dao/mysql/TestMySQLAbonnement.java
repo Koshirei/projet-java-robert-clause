@@ -18,7 +18,7 @@ public class TestMySQLAbonnement {
     Abonnement abonnement;
 
     @Before
-    public void init() throws SQLException, IOException {
+    public void init() throws Exception {
         mySQLAbonnementDAO = MySQLAbonnementDAO.getInstance();
         abonnement = new Abonnement(-2, 1, "abc999", new Date(0), new Date(10));
     }
@@ -49,13 +49,13 @@ public class TestMySQLAbonnement {
     }
 
     @Test
-    public void testGetByIdOk() throws SQLException, IOException {
+    public void testGetByIdOk() throws Exception {
         // il doit y avoir un element avec l'id 1 sinon ne amrche pas
         Assert.assertEquals(abonnement.getId(), mySQLAbonnementDAO.getById(abonnement.getId()).getId());
     }
 
     @Test
-    public void testGetByIdPasOk() throws SQLException, IOException {
+    public void testGetByIdPasOk() throws Exception {
         Assert.assertEquals(-1, mySQLAbonnementDAO.getById(-9).getId());
     }
 

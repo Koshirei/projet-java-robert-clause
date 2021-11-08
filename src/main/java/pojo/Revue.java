@@ -100,19 +100,6 @@ public class Revue {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Revue revue = (Revue) o;
-        return Float.compare(revue.tarif, tarif) == 0 && Objects.equals(reference, revue.reference) && Objects.equals(titre, revue.titre) && Objects.equals(description, revue.description) && Objects.equals(periodicite, revue.periodicite);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(reference, titre, description, tarif, periodicite);
-    }
-
-    @Override
     public String toString() {
         return "Revue{" +
                 "reference='" + reference + '\'' +
@@ -121,5 +108,18 @@ public class Revue {
                 ", tarif=" + tarif +
                 ", periodicite='" + periodicite + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Revue revue = (Revue) o;
+        return id == revue.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -19,7 +19,7 @@ public abstract class DAOFactory {
         return daof;
     }
 
-    public abstract AbonnementDAO getAbonnementDAO();
+    public abstract AbonnementDAO getAbonnementDAO() throws Exception;
     public abstract ClientDAO getClientDAO();
     public abstract PeriodiciteDAO getPeriodiciteDAO();
     public abstract RevueDAO getRevueDAO();

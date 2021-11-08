@@ -5,36 +5,35 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import pojo.Abonnement;
-
-import java.sql.Date;
+import pojo.Client;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestListeMemoireAbonnementDAO {
-    ListeMemoireAbonnementDAO listeMemoireAbonnement;
-    Abonnement abonnement;
+public class TestListeMemoireClientDAO {
+
+    ListeMemoireClientDAO listeMemoireClient;
+    Client client;
 
     @Before
-    public void init() throws Exception {
-        listeMemoireAbonnement = ListeMemoireAbonnementDAO.getInstance();
-        abonnement = new Abonnement(-2, -2, "ABC", new Date(0), new Date(10));
+    public void init() {
+        listeMemoireClient = ListeMemoireClientDAO.getInstance();
+        client = new Client(-2, "ABC", "DEF", "123", "GHI", "456", "JKL", "MNO");
     }
 
     @Test
     public void testGetInstanceOk() {
-        Assert.assertEquals(ListeMemoireAbonnementDAO.class, listeMemoireAbonnement.getClass());
+        Assert.assertEquals(ListeMemoireClientDAO.class, listeMemoireClient.getClass());
     }
 
     @Test
     public void testCreerOk() throws Exception {
-        Assert.assertTrue(this.listeMemoireAbonnement.creer(abonnement));
+        Assert.assertTrue(this.listeMemoireClient.creer(client));
     }
 
     @Test
     public void testCreerPasOk() {
         try {
-            abonnement = new Abonnement();
-            this.listeMemoireAbonnement.creer(abonnement);
+            client = new Client();
+            this.listeMemoireClient.creer(client);
 
             Assert.fail("Erreur, ne doit pas fonctionner");
 
@@ -45,15 +44,15 @@ public class TestListeMemoireAbonnementDAO {
     }
 
     @Test
-    public void testGetByIdOk() throws Exception {
+    public void testGetByIdOk() {
         // il doit y avoir un element avec l'id 1 sinon ne amrche pas
-        Assert.assertEquals(abonnement.getId(), listeMemoireAbonnement.getById(abonnement.getId()).getId());
+        Assert.assertEquals(client.getId(), listeMemoireClient.getById(client.getId()).getId());
     }
 
     @Test
     public void testGetByIdPasOk() {
         try {
-            listeMemoireAbonnement.getById(-9).getId();
+            listeMemoireClient.getById(-9).getId();
 
             Assert.fail("Ne doit pas fonctionner.");
 
@@ -61,21 +60,19 @@ public class TestListeMemoireAbonnementDAO {
         } catch (IllegalArgumentException e) {
             Assert.assertEquals("Aucun objet ne possède cet identifiant", e.getMessage());
 
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
     @Test
     public void testModifierOk() {
-        Assert.assertTrue(this.listeMemoireAbonnement.modifier(abonnement));
+        Assert.assertTrue(this.listeMemoireClient.modifier(client));
     }
 
     @Test
     public void testModifierPasOk() {
         try {
-            abonnement.setId(-9);
-            Assert.assertFalse(this.listeMemoireAbonnement.modifier(abonnement));
+            client.setId(-9);
+            Assert.assertFalse(this.listeMemoireClient.modifier(client));
         } catch (IllegalArgumentException e) {
             Assert.assertEquals("Tentative de modification d'un objet inexistant", e.getMessage());
 
@@ -85,7 +82,7 @@ public class TestListeMemoireAbonnementDAO {
 
     @Test
     public void testSupprimerOk() {
-        Assert.assertTrue(this.listeMemoireAbonnement.supprimer(abonnement));
+        Assert.assertTrue(this.listeMemoireClient.supprimer(client));
     }
 
     @Test
@@ -93,8 +90,8 @@ public class TestListeMemoireAbonnementDAO {
 
 
         try {
-            this.abonnement.setId(-9);
-            this.listeMemoireAbonnement.supprimer(abonnement);
+            this.client.setId(-9);
+            this.listeMemoireClient.supprimer(client);
 
         } catch (IllegalArgumentException e) {
             Assert.assertEquals("Tentative de modification d'un objet inexistant", e.getMessage());

@@ -1,10 +1,8 @@
 package dao.listememoire;
 
 
-
 import dao.AbonnementDAO;
 import pojo.Abonnement;
-import pojo.Periodicite;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -17,7 +15,7 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 
     public ArrayList<Abonnement> donnees;
 
-    private ListeMemoireAbonnementDAO() {
+    private ListeMemoireAbonnementDAO() throws Exception {
         this.donnees = new ArrayList<>();
 
         this.donnees.add(new Abonnement(1, 1 , "2" , new Date(0), new Date(0) ));
@@ -26,7 +24,7 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
         this.donnees.add(new Abonnement(4,1, "1", new Date(0), new Date(0) ));
     }
 
-    public static ListeMemoireAbonnementDAO getInstance() {
+    public static ListeMemoireAbonnementDAO getInstance() throws Exception {
         if (instance == null) {
             instance = new ListeMemoireAbonnementDAO();
         }
@@ -85,7 +83,7 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
     }
 
     @Override
-    public Abonnement getById(int id) throws IllegalArgumentException {
+    public Abonnement getById(int id) throws Exception {
         int idx = this.donnees.indexOf(new Abonnement(id, 0,"ABC", null, null));
 
         if (idx == -1) {

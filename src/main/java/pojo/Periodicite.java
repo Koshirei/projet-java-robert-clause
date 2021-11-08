@@ -50,8 +50,11 @@ public class Periodicite {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Periodicite that = (Periodicite) o;
-        return id == that.id && Objects.equals(libelle, that.libelle);
+        return id == that.id;
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

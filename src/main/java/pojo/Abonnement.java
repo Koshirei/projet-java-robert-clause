@@ -10,7 +10,7 @@ public class Abonnement {
     private Date dateDebut;
     private Date dateFin;
 
-    public Abonnement(int id, int numeroClient, String referenceRevue, Date dateDebut, Date dateFin) {
+    public Abonnement(int id, int numeroClient, String referenceRevue, Date dateDebut, Date dateFin) throws Exception {
         this.setId(id);
         this.setNumeroClient(numeroClient);
         this.setReferenceRevue(referenceRevue);
@@ -18,7 +18,7 @@ public class Abonnement {
         this.setDateFin(dateFin);
     }
 
-    public Abonnement(int numeroClient, String referenceRevue, Date dateDebut, Date dateFin) {
+    public Abonnement(int numeroClient, String referenceRevue, Date dateDebut, Date dateFin) throws Exception {
         this.setId(-1);
         this.setNumeroClient(numeroClient);
         this.setReferenceRevue(referenceRevue);
@@ -54,12 +54,17 @@ public class Abonnement {
         return referenceRevue;
     }
 
-    public void setReferenceRevue(String referenceRevue) {
+    public void setReferenceRevue(String referenceRevue) throws Exception {
+
+        if ( referenceRevue==null){
+            throw new Exception("Reference revue null");
+        }
         referenceRevue = referenceRevue.trim();
         referenceRevue = referenceRevue.replaceAll(" ", "");
         referenceRevue = referenceRevue.toUpperCase();
 
         this.referenceRevue = referenceRevue;
+
     }
 
     public Date getDateDebut() {

@@ -9,10 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
-
     private static ListeMemoirePeriodiciteDAO instance;
 
-    private List<Periodicite> donnees;
+    private ArrayList<Periodicite> donnees;
+
+    private ListeMemoirePeriodiciteDAO() {
+        this.donnees = new ArrayList<>();
+
+        this.donnees.add(new Periodicite(1, "Quotidien"));
+        this.donnees.add(new Periodicite(2, "Hebdomadaire"));
+        this.donnees.add(new Periodicite(3, "Mensuel"));
+        this.donnees.add(new Periodicite(4, "Annuel"));
+    }
 
 
     public static ListeMemoirePeriodiciteDAO getInstance() {
@@ -24,34 +32,31 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
         return instance;
     }
 
-    private ListeMemoirePeriodiciteDAO() {
 
-        this.donnees = new ArrayList<Periodicite>();
-
-        this.donnees.add(new Periodicite(1, "Mensuel"));
-        this.donnees.add(new Periodicite(2, "Quotidien"));
-    }
 
 
     @Override
-    public boolean creer(Periodicite objet) {
+    public boolean creer(Periodicite objet) throws Exception {
+        if (objet.getId() == -1) {
+            objet.setId(5);
 
-        objet.setId(3);
-        // Ne fonctionne que si l'objet m�tier est bien fait...
-        while (this.donnees.contains(objet)) {
-
-            objet.setId(objet.getId() + 1);
+            while (this.donnees.contains(objet)) {
+                objet.setId(objet.getId() + 1);
+            }
         }
-        boolean ok = this.donnees.add(objet);
 
-        return ok;
+        if(objet.getLibelle()==null){
+            throw new Exception("Une des valeurs n'est pas définie");
+        }
+
+        return this.donnees.add(objet);
     }
 
     @Override
-    public boolean modifier(Periodicite objet) {
+    public boolean modifier(Periodicite objet) throws IllegalArgumentException {
 
-        // Ne fonctionne que si l'objet m�tier est bien fait...
         int idx = this.donnees.indexOf(objet);
+
         if (idx == -1) {
             throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
         } else {
@@ -63,17 +68,12 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
     }
 
     @Override
-    public List<Periodicite> findAll(Periodicite objet) throws SQLException, IOException {
-        return null;
-    }
-
-    @Override
-    public boolean supprimer(Periodicite objet) {
+    public boolean supprimer(Periodicite objet) throws IllegalArgumentException {
 
         Periodicite supprime;
 
-        // Ne fonctionne que si l'objet m�tier est bien fait...
         int idx = this.donnees.indexOf(objet);
+
         if (idx == -1) {
             throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
         } else {
@@ -84,11 +84,12 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
     }
 
     @Override
-    public Periodicite getById(int id) {
-        // Ne fonctionne que si l'objet m�tier est bien fait...
+    public Periodicite getById(int id) throws IllegalArgumentException {
+
         int idx = this.donnees.indexOf(new Periodicite(id, "test"));
+
         if (idx == -1) {
-            throw new IllegalArgumentException("Aucun objet ne poss�de cet identifiant");
+            throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
         } else {
             return this.donnees.get(idx);
         }

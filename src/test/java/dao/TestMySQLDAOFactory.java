@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class TestMySQLDAOFactory {
     @Test
-    public void testGetAbonnementDAOOk() {
+    public void testGetAbonnementDAOOk() throws Exception {
         Assert.assertEquals(MySQLAbonnementDAO.class, MySQLDAOFactory.getDAOFactory(Persistence.MYSQL).getAbonnementDAO().getClass());
     }
 

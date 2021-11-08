@@ -5,36 +5,35 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import pojo.Abonnement;
-
-import java.sql.Date;
+import pojo.Revue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestListeMemoireAbonnementDAO {
-    ListeMemoireAbonnementDAO listeMemoireAbonnement;
-    Abonnement abonnement;
+public class TestListeMemoireRevueDAO {
+
+    ListeMemoireRevueDAO listeMemoireRevue;
+    Revue revue;
 
     @Before
     public void init() throws Exception {
-        listeMemoireAbonnement = ListeMemoireAbonnementDAO.getInstance();
-        abonnement = new Abonnement(-2, -2, "ABC", new Date(0), new Date(10));
+        listeMemoireRevue = ListeMemoireRevueDAO.getInstance();
+        revue = new Revue(-2, "Titi", "Toto", "Toto part en aventure", 15.2f,"hebdomadaire");
     }
 
     @Test
     public void testGetInstanceOk() {
-        Assert.assertEquals(ListeMemoireAbonnementDAO.class, listeMemoireAbonnement.getClass());
+        Assert.assertEquals(ListeMemoireRevueDAO.class, listeMemoireRevue.getClass());
     }
 
     @Test
     public void testCreerOk() throws Exception {
-        Assert.assertTrue(this.listeMemoireAbonnement.creer(abonnement));
+        Assert.assertTrue(this.listeMemoireRevue.creer(revue));
     }
 
     @Test
     public void testCreerPasOk() {
         try {
-            abonnement = new Abonnement();
-            this.listeMemoireAbonnement.creer(abonnement);
+            revue = new Revue();
+            this.listeMemoireRevue.creer(revue);
 
             Assert.fail("Erreur, ne doit pas fonctionner");
 
@@ -47,13 +46,13 @@ public class TestListeMemoireAbonnementDAO {
     @Test
     public void testGetByIdOk() throws Exception {
         // il doit y avoir un element avec l'id 1 sinon ne amrche pas
-        Assert.assertEquals(abonnement.getId(), listeMemoireAbonnement.getById(abonnement.getId()).getId());
+        Assert.assertEquals(revue.getId(), listeMemoireRevue.getById(revue.getId()).getId());
     }
 
     @Test
-    public void testGetByIdPasOk() {
+    public void testGetByIdPasOk() throws Exception {
         try {
-            listeMemoireAbonnement.getById(-9).getId();
+            listeMemoireRevue.getById(-9).getId();
 
             Assert.fail("Ne doit pas fonctionner.");
 
@@ -61,21 +60,19 @@ public class TestListeMemoireAbonnementDAO {
         } catch (IllegalArgumentException e) {
             Assert.assertEquals("Aucun objet ne possède cet identifiant", e.getMessage());
 
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
     @Test
     public void testModifierOk() {
-        Assert.assertTrue(this.listeMemoireAbonnement.modifier(abonnement));
+        Assert.assertTrue(this.listeMemoireRevue.modifier(revue));
     }
 
     @Test
     public void testModifierPasOk() {
         try {
-            abonnement.setId(-9);
-            Assert.assertFalse(this.listeMemoireAbonnement.modifier(abonnement));
+            revue.setId(-9);
+            Assert.assertFalse(this.listeMemoireRevue.modifier(revue));
         } catch (IllegalArgumentException e) {
             Assert.assertEquals("Tentative de modification d'un objet inexistant", e.getMessage());
 
@@ -85,7 +82,7 @@ public class TestListeMemoireAbonnementDAO {
 
     @Test
     public void testSupprimerOk() {
-        Assert.assertTrue(this.listeMemoireAbonnement.supprimer(abonnement));
+        Assert.assertTrue(this.listeMemoireRevue.supprimer(revue));
     }
 
     @Test
@@ -93,12 +90,13 @@ public class TestListeMemoireAbonnementDAO {
 
 
         try {
-            this.abonnement.setId(-9);
-            this.listeMemoireAbonnement.supprimer(abonnement);
+            this.revue.setId(-9);
+            this.listeMemoireRevue.supprimer(revue);
 
         } catch (IllegalArgumentException e) {
             Assert.assertEquals("Tentative de modification d'un objet inexistant", e.getMessage());
 
         }
     }
+
 }
